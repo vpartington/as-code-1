@@ -14,7 +14,7 @@ Environment:
       - user: test
         pass: tester456
         port: 3381
-  - name: Acc
+  - name: Acceptance
     Infrastructure:
       - type: tomcat
         number: 4            # 2 tomcats should be created
