@@ -14,7 +14,7 @@ Environment:
       - user: test
         pass: tester456
         port: 3381
-  - name: Acceptance
+  - name: Acc
     Infrastructure:
       - type: tomcat
         number: 4            # 2 tomcats should be created
@@ -29,7 +29,7 @@ Environment:
       - user: acceptance
         pass: accept123
         port: 3382
-  - name: Test
+  - name: Prod
     Infrastructure:
       - type: tomcat
         number: 4            # 2 tomcats should be created
