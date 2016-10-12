@@ -23,10 +23,11 @@ Environment:
         number: 2            # 2 tomcats should be created
         deployment_groups: 2 # 2 deployment groups to ensure that we don't deploy to both concurrently, works alongside the orchestrator parameter
       - type: mysql
-        port: 3380
+        port: "{{port}}"     # Values can contain placeholders
     Dictionary:
       - user: test
         pass: tester123
+        port: 3380
   - name: xld://Environment/Test
     Dictionary: xld://Environment/Test/Dictionary
   - name: xld://Environment/Acceptance

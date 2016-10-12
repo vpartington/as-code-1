@@ -8,11 +8,12 @@ Environment:
         deployment_groups: 2 # 2 deployment groups to ensure that we don't deploy to both concurrently, works alongside the orchestrator parameter
         tags: tomcat
       - type: mysql
-        port: 3380
+        port: "{{port}}"     # Values can contain placeholders
         tags: mysql
     Dictionary:
       - user: test
         pass: tester456
+        port: 3381
   - name: Acceptance
     Infrastructure:
       - type: tomcat
@@ -22,11 +23,12 @@ Environment:
       - type: mysql
         number: 2
         deployment_groups: 2
-        port: 3380
+        port: "{{port}}"     # Values can contain placeholders
         tags: mysql
     Dictionary:
       - user: acceptance
         pass: accept123
+        port: 3382
   - name: Test
     Infrastructure:
       - type: tomcat
@@ -36,8 +38,9 @@ Environment:
       - type: mysql
         number: 2
         deployment_groups: 2
-        port: 3380
+        port: "{{port}}"     # Values can contain placeholders
         tags: mysql
     Dictionary:
       - user: prod
         pass: prod123
+        port: 3383
