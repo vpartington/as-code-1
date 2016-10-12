@@ -9,8 +9,10 @@ Application:
     - name: MyApp.war
       type: tomcat
       dependencies: MyApp.sql
+      tags: tomcat
     - name: MyApp.sql
       type: mysql
+      tags: mysql
   orchestrator: sequential-by-deployment-group
 
 # The Environment section describes the environments the application can land on. This can either be a defined infrastructure (for local development), or a link to an environment in XLD, which the application will then use
