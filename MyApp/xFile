@@ -25,8 +25,8 @@ Environment:
       - type: mysql
         port: "{{port}}"     # Values can contain placeholders
     Dictionary:
-      - user: test
-        pass: tester123
+      - user: dev
+        pass: dev123
         port: 3380
   - name: xld://Environment/Test
     Dictionary: xld://Environment/Test/Dictionary
