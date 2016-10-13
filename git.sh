@@ -36,5 +36,6 @@ remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
 To git@github.com:xebialabs/xfile.git
    30651d6..c20e310  master -> master
 "
+sed -i -e 's/VERSION_TST=1.2/VERSION_TST=1.5/' ./versions
 ;;
 esac
