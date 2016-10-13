@@ -36,12 +36,14 @@ Deploy Application \"MyApp\" - version 1.5:
 "deploy")
 if [[ ${3} = "Acceptance" ]] ; then 
         echo "Deploying MyApp to Acceptance"
-        echo "Checking if the required Environment exists in XLD"
+        echo "Checking if the required Environment ${3} exists in XLD"
         sleep 2
         echo "Environment found!"
         echo "Deploying MyApp.sql... to mysql1"
+        echo "Done"
         sleep 2
         echo "Deploying MyApp.sql... to mysql2"
+        echo "Done"
         sleep 2
         echo "Deploying MyApp.war to tomcat1..."
         echo "Deploying MyApp.war to tomcat3..."
@@ -51,28 +53,27 @@ if [[ ${3} = "Acceptance" ]] ; then
         echo "Deploying MyApp.war to tomcat4..."
         sleep 2
         echo "Done!"
-        sed -e 's/VERSION_ACC=1.1/VERSION_ACC=1.5/' versions
+        sed -i -e 's/VERSION_ACC=1.1/VERSION_ACC=1.5/' ./versions
 else
-        echo "Deploying MyApp to Dev
-        Checking if the required Environment exists in XLD"
+        echo "Deploying MyApp to Development"
+        echo "Checking if the required Environment Develoment exists in XLD"
         sleep 2
-        echo "Environment not found! 
-        XL Deploy will create the required components
-        Creating tomcat1..."
+        echo "Environment Development not found!"
+        echo "XL Deploy will create the required components"
+        echo "Creating tomcat1..."
         sleep 2
         echo "Creating tomcat2..."
         sleep 2
         echo "Creating mysql1..."
         sleep 2
-        echo "Environment created
-        Deploying MyApp.sql..."
+        echo "Environment Development created"
+        echo "Deploying MyApp.sql..."
         sleep 2
         echo "Deploying MyApp.war to tomcat1..."
         sleep 2
         echo "Deploying MyApp.war to tomcat2..."
         sleep 2
-        echo "Done!
-        "
+        echo "Done!"
 fi
 ;;
 ################################################################
