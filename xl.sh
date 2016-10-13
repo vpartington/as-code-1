@@ -7,9 +7,6 @@ echo "VERSION_TST=1.2
 VERSION_ACC=1.1
 VERSION_PRD=1.0" > versions
 ;;
-"test")
-sed -e 's/VERSION_TST=1.2/VERSION_TST=1.5/' versions
-;;
 ################################################################
 "preview") 
 echo "
