@@ -3,10 +3,15 @@
 
 case ${1} in
 "prepare")
-echo "VERSION_TST=1.2
-VERSION_ACC=1.1
-VERSION_PRD=1.0" > /home/ben2404/Git/xfile/versions
-
+if [ -x versions ];  then
+        echo "VERSION_TST=1.2
+        VERSION_ACC=1.1
+        VERSION_PRD=1.0" > versions
+else
+        echo "VERSION_TST=1.2
+        VERSION_ACC=1.1
+        VERSION_PRD=1.0" > ../versions
+fi
 ;;
 ################################################################
 "preview") 
@@ -38,11 +43,11 @@ if [[ ${3} = "Acceptance" ]] ; then
         sleep 2
         echo "Environment found!"
         echo "Deploying MyApp.sql... to mysql1"
-        echo "Done"
         sleep 2
+        echo "Done"
         echo "Deploying MyApp.sql... to mysql2"
-        echo "Done"
         sleep 2
+        echo "Done"
         echo "Deploying MyApp.war to tomcat1..."
         echo "Deploying MyApp.war to tomcat3..."
         sleep 2
@@ -51,7 +56,11 @@ if [[ ${3} = "Acceptance" ]] ; then
         echo "Deploying MyApp.war to tomcat4..."
         sleep 2
         echo "Done!"
-        sed -i -e 's/VERSION_ACC=1.1/VERSION_ACC=1.5/' /home/ben2404/Git/xfile/versions
+        if [ -x versions ]; then
+                sed -i -e 's/VERSION_ACC=1.1/VERSION_ACC=1.5/' versions
+        else 
+                sed -i -e 's/VERSION_ACC=1.1/VERSION_ACC=1.5/' ../versions
+        fi
 else
         echo "Deploying MyApp to Development"
         echo "Checking if the required Environment Development exists in XLD"
@@ -60,15 +69,20 @@ else
         echo "XL Deploy will create the required components"
         echo "Creating tomcat1..."
         sleep 2
+        echo "Done"
         echo "Creating tomcat2..."
         sleep 2
+        echo "Done"
         echo "Creating mysql1..."
         sleep 2
+        echo "Done"
         echo "Environment Development created"
         echo "Deploying MyApp.sql..."
         sleep 2
+        echo "Done"
         echo "Deploying MyApp.war to tomcat1..."
         sleep 2
+        echo "Done"
         echo "Deploying MyApp.war to tomcat2..."
         sleep 2
         echo "Done!"
@@ -76,38 +90,74 @@ fi
 ;;
 ################################################################
 "list")
-if [[ ${2} = "MyApp" ]] ; then 
-        echo "Connecting to XLD to show deployed applications"
-        sleep 2
-        echo "Applications present on XLD:"
-        echo "MyApp"
-        echo "|-Test       - `cat /home/ben2404/Git/xfile/versions | grep VERSION_TST | cut -d "=" -f 2`"
-        echo "|-Acceptance - `cat /home/ben2404/Git/xfile/versions | grep VERSION_ACC | cut -d "=" -f 2`"
-        echo "|-Production - `cat /home/ben2404/Git/xfile/versions | grep VERSION_PRD | cut -d "=" -f 2`"
-elif [[ ${2} = "all" ]] ; then 
-        echo "Connecting to XLD to show deployed applications"
-        sleep 2
-        echo "Applications present on XLD:"
-        echo "DependentTestApp"
-        echo "|-Test       - 1.0"
-        echo "|-Acceptance - 0.9"
-        echo "|-Production - 0.8"
-        echo "LongRunningApp"
-        echo "|-Test   - 1.0"
-        echo "MyApp"
-        echo "|-Test       - `cat /home/ben2404/Git/xfile/versions | grep VERSION_TST | cut -d "=" -f 2`"
-        echo "|-Acceptance - `cat /home/ben2404/Git/xfile/versions | grep VERSION_ACC | cut -d "=" -f 2`"
-        echo "|-Production - `cat /home/ben2404/Git/xfile/versions | grep VERSION_PRD | cut -d "=" -f 2`"
-        echo "TestApp"
-        echo "|-Test   - 1.0"
-else 
-        echo "Connecting to XLD to show deployed applications"
-        sleep 2
-        echo "Applications present on XLD:"
-        echo "MyApp"
-        echo "|-Test       - `cat /home/ben2404/Git/xfile/versions | grep VERSION_TST | cut -d "=" -f 2`"
-        echo "|-Acceptance - `cat /home/ben2404/Git/xfile/versions | grep VERSION_ACC | cut -d "=" -f 2`"
-        echo "|-Production - `cat /home/ben2404/Git/xfile/versions | grep VERSION_PRD | cut -d "=" -f 2`"
+if [ -x versions ]; then
+        if [[ ${2} = "MyApp" ]] ; then 
+                echo "Connecting to XLD to show deployed applications"
+                sleep 2
+                echo "Applications present on XLD:"
+                echo "MyApp"
+                echo "|-Test       - `cat versions | grep VERSION_TST | cut -d "=" -f 2`"
+                echo "|-Acceptance - `cat versions | grep VERSION_ACC | cut -d "=" -f 2`"
+                echo "|-Production - `cat versions | grep VERSION_PRD | cut -d "=" -f 2`"
+        elif [[ ${2} = "all" ]] ; then 
+                echo "Connecting to XLD to show deployed applications"
+                sleep 2
+                echo "Applications present on XLD:"
+                echo "DependentTestApp"
+                echo "|-Test       - 1.0"
+                echo "|-Acceptance - 0.9"
+                echo "|-Production - 0.8"
+                echo "LongRunningApp"
+                echo "|-Test   - 1.0"
+                echo "MyApp"
+                echo "|-Test       - `cat versions | grep VERSION_TST | cut -d "=" -f 2`"
+                echo "|-Acceptance - `cat versions | grep VERSION_ACC | cut -d "=" -f 2`"
+                echo "|-Production - `cat versions | grep VERSION_PRD | cut -d "=" -f 2`"
+                echo "TestApp"
+                echo "|-Test   - 1.0"
+        else 
+                echo "Connecting to XLD to show deployed applications"
+                sleep 2
+                echo "Applications present on XLD:"
+                echo "MyApp"
+                echo "|-Test       - `cat versions | grep VERSION_TST | cut -d "=" -f 2`"
+                echo "|-Acceptance - `cat versions | grep VERSION_ACC | cut -d "=" -f 2`"
+                echo "|-Production - `cat versions | grep VERSION_PRD | cut -d "=" -f 2`"
+        fi
+else
+        if [[ ${2} = "MyApp" ]] ; then 
+                echo "Connecting to XLD to show deployed applications"
+                sleep 2
+                echo "Applications present on XLD:"
+                echo "MyApp"
+                echo "|-Test       - `cat ../versions | grep VERSION_TST | cut -d "=" -f 2`"
+                echo "|-Acceptance - `cat ../versions | grep VERSION_ACC | cut -d "=" -f 2`"
+                echo "|-Production - `cat ../versions | grep VERSION_PRD | cut -d "=" -f 2`"
+        elif [[ ${2} = "all" ]] ; then 
+                echo "Connecting to XLD to show deployed applications"
+                sleep 2
+                echo "Applications present on XLD:"
+                echo "DependentTestApp"
+                echo "|-Test       - 1.0"
+                echo "|-Acceptance - 0.9"
+                echo "|-Production - 0.8"
+                echo "LongRunningApp"
+                echo "|-Test   - 1.0"
+                echo "MyApp"
+                echo "|-Test       - `cat ../versions | grep VERSION_TST | cut -d "=" -f 2`"
+                echo "|-Acceptance - `cat ../versions | grep VERSION_ACC | cut -d "=" -f 2`"
+                echo "|-Production - `cat ../versions | grep VERSION_PRD | cut -d "=" -f 2`"
+                echo "TestApp"
+                echo "|-Test   - 1.0"
+        else 
+                echo "Connecting to XLD to show deployed applications"
+                sleep 2
+                echo "Applications present on XLD:"
+                echo "MyApp"
+                echo "|-Test       - `cat ../versions | grep VERSION_TST | cut -d "=" -f 2`"
+                echo "|-Acceptance - `cat ../versions | grep VERSION_ACC | cut -d "=" -f 2`"
+                echo "|-Production - `cat ../versions | grep VERSION_PRD | cut -d "=" -f 2`"
+        fi
 fi
 ;;
 ################################################################
