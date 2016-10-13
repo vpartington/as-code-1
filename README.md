@@ -4,12 +4,12 @@ It consists of simple bash scripts, and two Xfiles.
 
 Just a quick demo-mockup-thing.
 
-Preparation:
+#Preparation:
 - Clone the repository
 - In the directory, run `source set_aliases.sh`
 - Run `xl prepare`
 
-Usage:
+#Usage:
 - Run `xl preview` to show the preview of what the Xfile will do
 - Run `xl deploy` to deploy MyApp to the Development environment
 - Run `xl list` to show which versions of MyApp are deployed on the XLD server
