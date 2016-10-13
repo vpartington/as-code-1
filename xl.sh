@@ -53,7 +53,7 @@ if [[ ${3} = "Acceptance" ]] ; then
         sed -i -e 's/VERSION_ACC=1.1/VERSION_ACC=1.5/' ./versions
 else
         echo "Deploying MyApp to Development"
-        echo "Checking if the required Environment Develoment exists in XLD"
+        echo "Checking if the required Environment Development exists in XLD"
         sleep 2
         echo "Environment Development not found!"
         echo "XL Deploy will create the required components"
@@ -74,21 +74,39 @@ else
 fi
 ;;
 ################################################################
-"list") 
-echo "Connecting to XLD to show deployed applications"
-sleep 2
-echo "Applications present on XLD:
-MyApp
-|-Test   - `cat versions | grep VERSION_TST | cut -d "=" -f 2`
-|-Acc    - `cat versions | grep VERSION_ACC | cut -d "=" -f 2`
-|-Prod   - `cat versions | grep VERSION_PRD | cut -d "=" -f 2`
-Test
-|-Test   - 2.0
-|-Acc    - 2.0
-|-Prod   - 2.0
-YourApp
-|-Test   - 1.0
-";;
+"list")
+if [[ ${2} = "MyApp" ]] ; then 
+        echo "Connecting to XLD to show deployed applications"
+        sleep 2
+        echo "Applications present on XLD:"
+        echo "MyApp"
+        echo "|-Test       - `cat versions | grep VERSION_TST | cut -d "=" -f 2`"
+        echo "|-Acceptance - `cat versions | grep VERSION_ACC | cut -d "=" -f 2`"
+        echo "|-Production - `cat versions | grep VERSION_PRD | cut -d "=" -f 2`"
+elif [[ ${2} = "all" ]] ; then 
+        echo "Connecting to XLD to show deployed applications"
+        sleep 2
+        echo "Applications present on XLD:"
+        echo "MyApp"
+        echo "|-Test       - `cat versions | grep VERSION_TST | cut -d "=" -f 2`"
+        echo "|-Acceptance - `cat versions | grep VERSION_ACC | cut -d "=" -f 2`"
+        echo "|-Production - `cat versions | grep VERSION_PRD | cut -d "=" -f 2`"
+        echo "Test"
+        echo "|-Test       - 2.0"
+        echo "|-Acceptance - 2.0"
+        echo "|-Production - 2.0"
+        echo "YourApp"
+        echo "|-Test   - 1.0"
+else 
+        echo "Connecting to XLD to show deployed applications"
+        sleep 2
+        echo "Applications present on XLD:"
+        echo "MyApp"
+        echo "|-Test       - `cat versions | grep VERSION_TST | cut -d "=" -f 2`"
+        echo "|-Acceptance - `cat versions | grep VERSION_ACC | cut -d "=" -f 2`"
+        echo "|-Production - `cat versions | grep VERSION_PRD | cut -d "=" -f 2`"
+fi
+;;
 ################################################################
 *)
 echo "xl is a command line interface to control deployments, preview them, or list applications installed"
