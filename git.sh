@@ -25,9 +25,9 @@ remote branch that 'git pull' uses to update the current branch.
 
 See 'git help config' and search for 'push.default' for further information.
 (the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
-'current' instead of 'simple' if you sometimes use older versions of Git)
-
-Counting objects: 4, done.
+'current' instead of 'simple' if you sometimes use older versions of Git)"
+sleep 2
+echo "Counting objects: 4, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (4/4), 345 bytes | 0 bytes/s, done.
