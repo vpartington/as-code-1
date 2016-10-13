@@ -2,10 +2,16 @@
 # This is the CLI mockup
 
 case ${1} in
+"prepare")
+echo "VERSION_TST=1.2
+VERSION_ACC=1.1
+VERSION_PRD=1.0" > versions
+;;
+"test")
+sed -e 's/VERSION_TST=1.2/VERSION_TST=1.5/' versions
+;;
+################################################################
 "preview") 
-export VERSION_TST="1.2"
-export VERSION_ACC="1.1"
-export VERSION_PRD="1.0"
 echo "
 This xFile will execute the following actions:
 Create environment:
@@ -25,8 +31,7 @@ Deploy Application \"MyApp\" - version 1.5:
 |-MyApp.war to container tomcat1, tomcat2
 |-Using the orchestrator sequential-by-deployment-group
 "
-# Need to add this hacky way of being able to set the variables
-bash;;
+;;
 ################################################################
 "deploy")
 if [[ ${3} = "Acceptance" ]] ; then 
@@ -46,8 +51,7 @@ if [[ ${3} = "Acceptance" ]] ; then
         echo "Deploying MyApp.war to tomcat4..."
         sleep 2
         echo "Done!"
-        export VERSION_ACC="1.5"
-        bash
+        sed -e 's/VERSION_ACC=1.1/VERSION_ACC=1.5/' versions
 else
         echo "Deploying MyApp to Dev
         Checking if the required Environment exists in XLD"
@@ -77,9 +81,9 @@ echo "Connecting to XLD to show deployed applications"
 sleep 2
 echo "Applications present on XLD:
 MyApp
-|-Test   - ${VERSION_TST}
-|-Acc    - ${VERSION_ACC}
-|-Prod   - ${VERSION_PRD}
+|-Test   - `cat versions | grep VERSION_TST | cut -d "=" -f 2`
+|-Acc    - `cat versions | grep VERSION_ACC | cut -d "=" -f 2`
+|-Prod   - `cat versions | grep VERSION_PRD | cut -d "=" -f 2`
 Test
 |-Test   - 2.0
 |-Acc    - 2.0
