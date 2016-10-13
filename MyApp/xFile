@@ -4,6 +4,7 @@
 # The Application section contains all the relevant information about the application, including dependencies and such.
 Application:
   name: MyApp
+  version: 1.5
   # The deployables section contains the different deployable files and of which type they are. Dependencies can also be defined here
   deployables:
     - name: MyApp.war
