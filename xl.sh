@@ -5,7 +5,8 @@ case ${1} in
 "prepare")
 echo "VERSION_TST=1.2
 VERSION_ACC=1.1
-VERSION_PRD=1.0" > versions
+VERSION_PRD=1.0" > /home/ben2404/Git/xfile/versions
+
 ;;
 ################################################################
 "preview") 
@@ -50,7 +51,7 @@ if [[ ${3} = "Acceptance" ]] ; then
         echo "Deploying MyApp.war to tomcat4..."
         sleep 2
         echo "Done!"
-        sed -i -e 's/VERSION_ACC=1.1/VERSION_ACC=1.5/' ./versions
+        sed -i -e 's/VERSION_ACC=1.1/VERSION_ACC=1.5/' /home/ben2404/Git/xfile/versions
 else
         echo "Deploying MyApp to Development"
         echo "Checking if the required Environment Development exists in XLD"
@@ -80,31 +81,33 @@ if [[ ${2} = "MyApp" ]] ; then
         sleep 2
         echo "Applications present on XLD:"
         echo "MyApp"
-        echo "|-Test       - `cat versions | grep VERSION_TST | cut -d "=" -f 2`"
-        echo "|-Acceptance - `cat versions | grep VERSION_ACC | cut -d "=" -f 2`"
-        echo "|-Production - `cat versions | grep VERSION_PRD | cut -d "=" -f 2`"
+        echo "|-Test       - `cat /home/ben2404/Git/xfile/versions | grep VERSION_TST | cut -d "=" -f 2`"
+        echo "|-Acceptance - `cat /home/ben2404/Git/xfile/versions | grep VERSION_ACC | cut -d "=" -f 2`"
+        echo "|-Production - `cat /home/ben2404/Git/xfile/versions | grep VERSION_PRD | cut -d "=" -f 2`"
 elif [[ ${2} = "all" ]] ; then 
         echo "Connecting to XLD to show deployed applications"
         sleep 2
         echo "Applications present on XLD:"
         echo "MyApp"
-        echo "|-Test       - `cat versions | grep VERSION_TST | cut -d "=" -f 2`"
-        echo "|-Acceptance - `cat versions | grep VERSION_ACC | cut -d "=" -f 2`"
-        echo "|-Production - `cat versions | grep VERSION_PRD | cut -d "=" -f 2`"
-        echo "Test"
-        echo "|-Test       - 2.0"
-        echo "|-Acceptance - 2.0"
-        echo "|-Production - 2.0"
-        echo "YourApp"
+        echo "|-Test       - `cat /home/ben2404/Git/xfile/versions | grep VERSION_TST | cut -d "=" -f 2`"
+        echo "|-Acceptance - `cat /home/ben2404/Git/xfile/versions | grep VERSION_ACC | cut -d "=" -f 2`"
+        echo "|-Production - `cat /home/ben2404/Git/xfile/versions | grep VERSION_PRD | cut -d "=" -f 2`"
+        echo "DependentTestApp"
+        echo "|-Test       - 1.0"
+        echo "|-Acceptance - 0.9"
+        echo "|-Production - 0.8"
+        echo "LongRunningApp"
+        echo "|-Test   - 1.0"
+        echo "TestApp"
         echo "|-Test   - 1.0"
 else 
         echo "Connecting to XLD to show deployed applications"
         sleep 2
         echo "Applications present on XLD:"
         echo "MyApp"
-        echo "|-Test       - `cat versions | grep VERSION_TST | cut -d "=" -f 2`"
-        echo "|-Acceptance - `cat versions | grep VERSION_ACC | cut -d "=" -f 2`"
-        echo "|-Production - `cat versions | grep VERSION_PRD | cut -d "=" -f 2`"
+        echo "|-Test       - `cat /home/ben2404/Git/xfile/versions | grep VERSION_TST | cut -d "=" -f 2`"
+        echo "|-Acceptance - `cat /home/ben2404/Git/xfile/versions | grep VERSION_ACC | cut -d "=" -f 2`"
+        echo "|-Production - `cat /home/ben2404/Git/xfile/versions | grep VERSION_PRD | cut -d "=" -f 2`"
 fi
 ;;
 ################################################################
