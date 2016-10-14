@@ -1,87 +1,69 @@
 // The xFile is a YAML-file which contains the information on the application
 // It includes information on Environment, Infrastructure, dictionaries, and such
-
 {
         // The Application section contains all the relevant information about the application, including dependencies and such.
         "Application": {
                 "name": "MyApp",
                 "version": 1.5,
                 // The deployables section contains the different deployable files and of which type they are. Dependencies can also be defined here
-                "deployables": [
-                        {
-                                "name": "MyApp.war",
-                                "type": "tomcat.War",
-                                "dependencies": "MyApp.sql",
-                                "tags": "tomcat"
-                        },
-                        {
-                                "name": "MyApp.sql",
-                                "type": "sql.SqlScript",
-                                "tags": "mysql"
-                        }
-                ],
+                "deployables": [{
+                        "name": "MyApp.war",
+                        "type": "tomcat.War",
+                        "dependencies": "MyApp.sql",
+                        "tags": "tomcat"
+                }, {
+                        "name": "MyApp.sql",
+                        "type": "sql.SqlScript",
+                        "tags": "mysql"
+                }],
                 "orchestrator": "sequential-by-deployment-group"
         },
         // The Environment section describes the environments the application can land on. This can either be a defined infrastructure (for local development), or a link to an environment in XLD, which the application will then use
-        "Environment": [
-                {
-                        "name": "Dev",
-                        "Infrastructure": [
-                                {
-                                        "type": "overthere.SshHost",
-                                        "address": "tomcat1.dev.example.com",
-                                        "username": "tomcat",
-                                        "password": "t0mc3t",
-                                        "servers": [
-                                                {
-                                                        "type": "tomcat.Server",
-                                                        "tomcatHome": "/opt/tomcat"
-                                                        "deploymentGroup": "2"
-                                                }
-                                        ]
-                                },
-                                {
-                                        "type": "overthere.SshHost",
-                                        "address": "tomcat2.dev.example.com",
-                                        "username": "tomcat",
-                                        "password": "t0mc3t",
-                                        "servers": [
-                                                {
-                                                        "type": "tomcat.Server",
-                                                        "tomcatHome": "/opt/tomcat"
-                                                        "deploymentGroup": "3"
-                                                }
-                                        ]
-                                },
-                                {
-                                        "type": "overthere.SshHost",
-                                        "address": "mysql.dev.example.com",
-                                        "username": "mysql",
-                                        "password": "m3sql",
-                                        "servers": [
-                                                {
-                                                        "type": "mysql.Server",
-                                                        "mysqlHome": "/opt/mysql"
-                                                        "deploymentGroup": "1"
-                                                }
-                                        ]
-                                },
-                        ],
-                        "Dictionary": [
-                                {
-                                        "user": "dev",
-                                        "pass": "dev123",
-                                        "port": 3380
-                                }
-                        ]
-                },
-                {
+        "Environment": [{
+                "name": "Dev",
+                "Infrastructure": [{
+                        "type": "overthere.SshHost",
+                        "address": "tomcat1.dev.example.com",
+                        "username": "tomcat",
+                        "password": "t0mc3t",
+                        "servers": [{
+                                "type": "tomcat.Server",
+                                "tomcatHome": "/opt/tomcat",
+                                "deploymentGroup": "2"
+                        }]
+                }, {
+                        "type": "overthere.SshHost",
+                        "address": "tomcat2.dev.example.com",
+                        "username": "tomcat",
+                        "password": "t0mc3t",
+                        "servers": [{
+                                "type": "tomcat.Server",
+                                "tomcatHome": "/opt/tomcat",
+                                "deploymentGroup": "3"
+                        }]
+                }, {
+                        "type": "overthere.SshHost",
+                        "address": "mysql.dev.example.com",
+                        "username": "mysql",
+                        "password": "m3sql",
+                        "servers": [{
+                                "type": "mysql.Server",
+                                "mysqlHome": "/opt/mysql",
+                                "port": "{{port}}",
+                                "deploymentGroup": "1"
+                        }]
+                }, {
+                        "Dictionary": [{
+                                "user": "dev",
+                                "pass": "dev123",
+                                "port": 3380
+                        }]
+                }, {
                         "name": "xld://Environment/Test",
                         "Dictionary": "xld://Environment/Test/Dictionary"
-                },
-                {
+                }, {
                         "name": "xld://Environment/Acceptance",
                         "Dictionary": "xld://Environment/Acceptance/Dictionary"
-                }
-        ]
+                }]
+        }]
 }
