@@ -1,0 +1,78 @@
+// The xFile for Ops is a bit different, it contains the more granular information on environments and infrastructure, and can be used to easily setup an XLD server to be used.
+{
+        "Environment": [
+                {
+                        "name": "Test",
+                        "Infrastructure": [
+                                {
+                                        "type": "tomcat",
+                                        "number": 2, // 2 tomcats should be created
+                                        "deployment_groups": 2, // 2 deployment groups to ensure that we don't deploy to both concurrently, works alongside the orchestrator parameter
+                                        "tags": "tomcat"
+                                },
+                                {
+                                        "type": "mysql",
+                                        "port": "{{port}}", // Values can contain placeholders
+                                        "tags": "mysql"
+                                }
+                        ],
+                        "Dictionary": [
+                                {
+                                        "user": "test",
+                                        "pass": "tester456",
+                                        "port": 3381
+                                }
+                        ]
+                },
+                {
+                        "name": "Acceptance",
+                        "Infrastructure": [
+                                {
+                                        "type": "tomcat",
+                                        "number": 4, // 4 tomcats should be created
+                                        "deployment_groups": 2, // 2 deployment groups to ensure that we don't deploy to both concurrently, works alongside the orchestrator parameter
+                                        "tags": "tomcat"
+                                },
+                                {
+                                        "type": "mysql",
+                                        "number": 2, // 2 mysql should be created
+                                        "deployment_groups": 2, // 2 deployment groups to ensure that we don't deploy to both concurrently, works alongside the orchestrator parameter
+                                        "port": "{{port}}", // Values can contain placeholders
+                                        "tags": "mysql"
+                                }
+                        ],
+                        "Dictionary": [
+                                {
+                                        "user": "acceptance",
+                                        "pass": "accept123",
+                                        "port": 3382
+                                }
+                        ]
+                },
+                {
+                        "name": "Prod",
+                        "Infrastructure": [
+                                {
+                                        "type": "tomcat",
+                                        "number": 4, // 4 tomcats should be created
+                                        "deployment_groups": 2, // 2 deployment groups to ensure that we don't deploy to both concurrently, works alongside the orchestrator parameter
+                                        "tags": "tomcat"
+                                },
+                                {
+                                        "type": "mysql",
+                                        "number": 2, // 2 mysql should be created
+                                        "deployment_groups": 2, // 2 deployment groups to ensure that we don't deploy to both concurrently, works alongside the orchestrator parameter
+                                        "port": "{{port}}", // Values can contain placeholders
+                                        "tags": "mysql"
+                                }
+                        ],
+                        "Dictionary": [
+                                {
+                                        "user": "prod",
+                                        "pass": "prod123",
+                                        "port": 3383
+                                }
+                        ]
+                }
+        ]
+}
