@@ -1,0 +1,1 @@
+alias xlr=./xlr.sh
