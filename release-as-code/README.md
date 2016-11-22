@@ -10,7 +10,7 @@
 
 # Scenario 2 - Seeding
 
-* Go to the `seending` directory: `cd seeding`
+* Go to the `seeding` directory: `cd seeding`
 * Show the empty team folder: `open 01\ -\ Team\ Folder.png`
 * Show the scripts tab in the folder: `open 02\ -\ script.png`
 * Show the script: `open 03\ -\ Release\ Code.png`
